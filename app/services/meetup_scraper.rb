@@ -5,25 +5,31 @@ class MeetupScraper
   end
 
   def scrape
-    events = elm_meetups.map do |urlname|
+    meetup_events = elm_meetups.map do |urlname|
       $meetup.events({ group_urlname: urlname })["results"]
     end.flatten
 
-    #TODO
-    # Union of DB and Fetched list
-    # Reject events with identical start_times
-    # Delete corresponding events from DB
-    # Process events into DB
+    
+    existing_external_events = Event.pluck(:external_id, :external_updated_at)
+    existing_external_ids = existing_external_events.map(&:first)
 
-    # Reject events with an external id
-    #existing_external_events = Event.pluck(:external_id, :external_updated_at)
-    #existing_external_ids = existing_external_events.map(&:first)
+    # Destroy DB Events if they have since been updated
+    meetup_events.each do |event|
+      meetup_event_id = event.fetch("id")
+      meetup_event_updated = event.fetch("updated").to_s
+      index = existing_external_ids.index(meetup_event_id)
+      if index && existing_external_events[index].last != meetup_event_updated
+        Event.find_by(external_id: meetup_event_id).destroy
+        existing_external_ids.slice!(index)
+      end
+    end
 
-    #events.reject! do |event|
-    #  existing_external_ids.include?(event.fetch("id"))
-    #end
+    # Reject Meetup Events if they already exist in DB
+    meetup_events.reject! do |event|
+      existing_external_ids.include?(event.fetch("id"))
+    end
 
-    events.each do |event|
+    meetup_events.each do |event|
       persist_event(transform_event(event))
     end
   end
@@ -35,7 +41,7 @@ class MeetupScraper
   end
 
   def persist_event(params)
-    # Event.create(params)
+    Event.create(params)
   end
 
   def elm_meetups
