@@ -1,0 +1,11 @@
+<h1>New Event</h1>
+
+<%= form_for @event, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+  <fieldset>
+    <legend>Paste in the URL of a Meetup Event</legend>
+    <%= f.label :url, "Meetup Event URL" %>
+    <%= f.text_field :url %>
+    <%= hidden_field_tag :link_only, true %>
+    <%= f.submit "Create", class: 'pure-button pure-button-primary' %>
+  </fieldset>
+<% end %>

@@ -1,0 +1,7 @@
+  <h2 class="content-subhead"><%= event.title %></h2>
+  <p><%= date_and_time_display(event.local_starts_at) %></p>
+  <p>
+  <%= event.city %>, <%= event.country %> (<%= sanitize event.host %>)<br>
+  <%= sanitize event.description %><br>
+  <%= link_to "Read More", event.url %>
+  </p>
