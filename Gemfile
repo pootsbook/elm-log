@@ -38,6 +38,11 @@ gem 'omniauth-github'
 gem 'pure-css-rails'
 gem 'font-awesome-rails'
 
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -53,3 +58,4 @@ group :development do
   gem 'spring'
 end
 
+ruby '2.3.0'
