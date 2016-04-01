@@ -19,5 +19,8 @@ class ApplicationController < ActionController::Base
 
   def find_identity
     Identity.find(session[:identity_id])
+  rescue ActiveRecord::RecordNotFound => e
+    session.delete(:identity_id)
+    nil
   end
 end

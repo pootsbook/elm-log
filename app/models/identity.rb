@@ -13,7 +13,7 @@ class Identity < ActiveRecord::Base
   end
 
   def self.find_from_omniauth(hash)
-    Identity.find_by!(provider: hash['provider'], uid: hash['uid'].to_s)
+    Identity.find_by(provider: hash['provider'], uid: hash['uid'].to_s)
   end
 
   def self.update_from_omniauth(identity, hash)

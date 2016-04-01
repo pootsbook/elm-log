@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     identity = Identity.find_or_create_from_omniauth(auth_hash)
     session[:identity_id] = identity.id
     notice = "Signed in!"
-  rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordNotSaved => e
+  rescue ActiveRecord::RecordNotSaved => e
     notice = "There was a problem signing in."
   ensure
     redirect_to root_url, notice: notice
