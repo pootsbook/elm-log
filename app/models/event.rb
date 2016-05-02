@@ -1,8 +1,20 @@
 class Event < ActiveRecord::Base
-  attr_accessor :time_zone
+
+  with_options(on: :direct_input) do |di|
+    di.validates_presence_of :title, :host, :city, :country, :description, :url
+    di.validates :time_zone, inclusion: {
+      in: ActiveSupport::TimeZone.all.map(&:name)
+    }
+  end
 
   def local_starts_at
-    starts_at.getlocal(utc_offset_fmt)
+    if utc_offset_fmt
+      starts_at.getlocal(utc_offset_fmt)
+    elsif time_zone
+      starts_at.in_time_zone(time_zone)
+    else
+      starts_at
+    end
   end
 
   scope :this_week, -> do

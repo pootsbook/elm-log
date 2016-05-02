@@ -6,7 +6,7 @@ class MeetupScraper
 
   def scrape_from_meetup_url(url)
     event_id = url.split("/").last
-    scrape_event(event_id)
+    scrape_event(event_id).first
   end
 
   def scrape_event(event_id)
@@ -53,7 +53,7 @@ class MeetupScraper
       existing_external_ids.include?(event.fetch("id"))
     end
 
-    events_list.each do |event|
+    events_list.map do |event|
       persist_event(transform_event(event))
     end
   end
@@ -92,6 +92,11 @@ class MeetupScraper
       Elmsinki
       berlin-elm-hackathon
       Elm-Wellington
+      Elm-Zurich
+      Sydney-Elm-Meetup
+      Elmoin
+      Elm-Portland-Maine
+      oslo-elm-meetup
     )
   end
 end

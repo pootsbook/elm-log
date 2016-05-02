@@ -1,11 +1,67 @@
 <h1>New Event</h1>
 
-<%= form_for @event, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+<%= form_for @event, html: { class: 'pure-form pure-form-aligned' } do |f| %>
   <fieldset>
-    <legend>Paste in the URL of a Meetup Event</legend>
-    <%= f.label :url, "Meetup Event URL" %>
-    <%= f.text_field :url %>
+    <legend>A. Paste in the URL of a Meetup Event OR</legend>
+    <div class="pure-control-group">
+      <%= f.label :url, "Meetup Event URL" %>
+      <%= f.text_field :url %>
+    </div>
     <%= hidden_field_tag :link_only, true %>
-    <%= f.submit "Create", class: 'pure-button pure-button-primary' %>
+    <div class="pure-controls">
+      <%= f.submit "Create", class: 'pure-button pure-button-primary' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<br>
+
+<%= form_for @event, html: { class: 'pure-form pure-form-aligned' } do |f| %>
+  <fieldset>
+    <legend>B. Enter Event details by hand</legend>
+
+    <div class="pure-control-group">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :starts_at %>
+      <%= f.datetime_select :starts_at %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :time_zone %>
+      <%= f.time_zone_select :time_zone, nil, default: "UTC" %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :host %>
+      <%= f.text_field :host %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :country %>
+      <%= f.country_select :country %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="pure-control-group">
+      <%= f.label :url, "Link to Details" %>
+      <%= f.text_field :url %>
+    </div>
+
+    <div class="pure-controls">
+      <%= f.submit "Create", class: 'pure-button pure-button-primary' %>
+    </div>
   </fieldset>
 <% end %>

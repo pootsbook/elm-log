@@ -37,6 +37,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'pure-css-rails'
 gem 'font-awesome-rails'
+gem 'country_select'
 
 group :production do
   gem 'puma'
@@ -47,6 +48,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
   gem 'dotenv-rails'
 end
 

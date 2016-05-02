@@ -11,8 +11,39 @@ class EventsController < ApplicationController
 
   def create
     if params[:link_only]
-      MeetupScraper.new.scrape_from_meetup_url(params[:event][:url])
+      @event = MeetupScraper.new.scrape_from_meetup_url(params[:event][:url])
+      redirect_to event_path(@event)
+    else
+      @event = Event.new(event_params_processed_for_time_zone)
+      if @event.save(context: :direct_input)
+        redirect_to event_path(@event), notice: "Success"
+      else
+        render :new
+      end
     end
-    redirect_to events_path
+  end
+
+  def show
+    @event = Event.find(params[:id])
+  end
+
+  private
+
+  def event_params_processed_for_time_zone
+    TimeZoneParamsProcessor.process(event_params)
+  end
+
+  def event_params
+    attrs = [
+      :title,
+      :starts_at,
+      :time_zone,
+      :host,
+      :city,
+      :country,
+      :description,
+      :url
+    ]
+    params.require(:event).permit(*attrs)
   end
 end
