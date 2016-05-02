@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :verify_signed_in, only: [:new, :create]
+  # before_action :verify_signed_in, only: [:new, :create]
 
   def index
     @events = Event.upcoming.order(starts_at: :asc)
