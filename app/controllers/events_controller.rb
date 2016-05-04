@@ -27,6 +27,21 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def edit
+    @event = Event.find(params[:id])
+    @event.starts_at = Time.zone.local_to_utc(@event.local_starts_at)
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.attributes = event_params_processed_for_time_zone
+    if @event.save(context: :direct_input)
+      redirect_to event_path(@event), notice: "Success"
+    else
+      render :edit
+    end
+  end
+
   private
 
   def event_params_processed_for_time_zone

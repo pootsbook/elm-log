@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'events#index'
-  resources :events, only: [:index, :new, :create, :show]
+  resources :events, except: [:destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
   get '/in', to: 'sessions#new', as: :in
