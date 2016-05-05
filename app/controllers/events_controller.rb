@@ -29,6 +29,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    # Rails will present time as UTC when we want time as if in timezone
     @event.starts_at = Time.zone.local_to_utc(@event.local_starts_at)
   end
 
