@@ -97,6 +97,9 @@ class MeetupScraper
       Elmoin
       Elm-Portland-Maine
       oslo-elm-meetup
+      Hangzhou-Elm-Meetup
+      Brno-Elm-Meetup
+      Elm-user-group-Vancouver
     )
   end
 end
