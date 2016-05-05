@@ -1,4 +1,5 @@
 class MeetupScraper
+  class RateLimitExceeded < StandardError; end
 
   def self.scrape
     new.scrape
@@ -16,16 +17,26 @@ class MeetupScraper
 
   def scrape_past_events
     meetup_events = elm_meetups.map do |urlname|
-      $meetup.events({ group_urlname: urlname, status: 'past' })["results"]
+      $meetup.events({ group_urlname: urlname, status: 'past' })
     end.flatten
     process_events_response(meetup_events)
   end
 
   def scrape
-    meetup_events = elm_meetups.map do |urlname|
-      $meetup.events({ group_urlname: urlname })["results"]
-    end.flatten
-    process_events_response(meetup_events)
+    fetch_meetup_events
+  rescue RateLimitExceeded
+  ensure
+    process_events_response(@meetup_events.flatten.compact)
+  end
+
+  def fetch_meetup_events
+    @meetup_events = []
+    elm_meetups.each do |urlname|
+      response = $meetup.events({ group_urlname: urlname })
+      raise RateLimitExceeded if ["bad_request", "blocked"].include?(response["code"])
+      @meetup_events << response["results"]
+    end
+    @meetup_events
   end
 
   private
