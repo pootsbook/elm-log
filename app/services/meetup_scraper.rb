@@ -33,7 +33,7 @@ class MeetupScraper
     @meetup_events = []
     elm_meetups.each do |urlname|
       response = $meetup.events({ group_urlname: urlname })
-      raise RateLimitExceeded if ["bad_request", "blocked"].include?(response["code"])
+      raise RateLimitExceeded if ["bad_request", "blocked", "throttled"].include?(response["code"])
       @meetup_events << response["results"]
     end
     @meetup_events
