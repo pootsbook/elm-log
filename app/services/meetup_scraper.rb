@@ -31,7 +31,7 @@ class MeetupScraper
 
   def fetch_meetup_events
     @meetup_events = []
-    elm_meetups.each do |urlname|
+    elm_meetups.reverse.each do |urlname|
       response = $meetup.events({ group_urlname: urlname })
       raise RateLimitExceeded if ["bad_request", "blocked", "throttled"].include?(response["code"])
       @meetup_events << response["results"]
