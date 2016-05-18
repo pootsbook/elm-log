@@ -1,2 +1,68 @@
-<%= link_to "Edit Event", edit_event_path(@event) %>
-<%= debug @event %>
+<%= link_to "Edit", edit_event_path(@event) %>
+
+<table class="pure-table pure-table-bordered">
+  <tr>
+    <td>Title</td>
+    <td><%= @event.title %></td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td><%= sanitize @event.description %></td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td><%= @event.country %></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td><%= @event.city %></td>
+  </tr>
+  <tr>
+    <td>Host</td>
+    <td><%= sanitize @event.host %></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><%= @event.url %></td>
+  </tr>
+  <tr>
+    <td>External ID</td>
+    <td><%= @event.external_id %></td>
+  </tr>
+  <tr>
+    <td>External Updated At</td>
+    <td><%= @event.external_updated_at %></td>
+  </tr>
+  <tr>
+    <td>Starts At</td>
+    <td><%= @event.starts_at %></td>
+  </tr>
+  <tr>
+    <td>Time Zone</td>
+    <td><%= @event.time_zone %></td>
+  </tr>
+  <tr>
+    <td>Local Starts At</td>
+    <td><%= @event.local_starts_at %></td>
+  </tr>
+  <tr>
+    <td>Local Starts At (formatted)</td>
+    <td><%= date_and_time_display(@event.local_starts_at) %></td>
+  </tr>
+  <tr>
+    <td>UTC Offset (formatted)</td>
+    <td><%= @event.utc_offset_fmt %></td>
+  </tr>
+  <tr>
+    <td>UTC Offset</td>
+    <td><%= @event.utc_offset %></td>
+  </tr>
+  <tr>
+    <td>Created At</td>
+    <td><%= @event.created_at %></td>
+  </tr>
+  <tr>
+    <td>Updated At</td>
+    <td><%= @event.updated_at %></td>
+  </tr>
+</table>

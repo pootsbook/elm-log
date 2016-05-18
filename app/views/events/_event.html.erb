@@ -4,4 +4,8 @@
   <%= event.city %>, <%= event.country %> (<%= sanitize event.host %>)<br>
   <%= sanitize event.description %><br>
   <%= link_to "Read More", event.url %>
+<% if current_identity -%>
+  | <%= link_to "Show", event_path(event) %>
+  | <%= link_to "Edit", edit_event_path(event) %>
+<% end -%>
   </p>
