@@ -111,6 +111,7 @@ class MeetupScraper
       Hangzhou-Elm-Meetup
       Brno-Elm-Meetup
       Elm-user-group-Vancouver
+      Elm-Meetup-Munich
     )
   end
 end
