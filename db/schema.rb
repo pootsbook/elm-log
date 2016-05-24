@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407072153) do
+ActiveRecord::Schema.define(version: 20160520115740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,27 @@ ActiveRecord::Schema.define(version: 20160407072153) do
     t.text     "raw"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "meetup_groups", force: :cascade do |t|
+    t.text     "description"
+    t.string   "name"
+    t.string   "city"
+    t.string   "country"
+    t.string   "url"
+    t.string   "external_id"
+    t.string   "utc_offset_fmt"
+    t.string   "time_zone"
+    t.string   "state"
+    t.string   "urlname"
+    t.string   "photo_highres"
+    t.string   "photo"
+    t.string   "photo_thumb"
+    t.integer  "member_count"
+    t.integer  "utc_offset"
+    t.datetime "external_created_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
 end

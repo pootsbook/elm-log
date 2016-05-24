@@ -17,16 +17,23 @@
 
       <div id="menu">
         <div class="pure-menu">
-          <p class="pure-menu-heading">Events</p>
+          <p class="pure-menu-heading" style="padding-left: 0.6em;">Community</p>
           <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Upcoming</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Past</a></li>
+            <li class="pure-menu-item"><%= link_to("Events", root_path, class: 'pure-menu-link') %></li>
+          </ul>
+          <ul class="pure-menu-list">
+            <li class="pure-menu-item"><%= link_to("Meetups", meetup_groups_path, class: 'pure-menu-link') %></li>
           </ul>
 
           <ul class="pure-menu-list" style="padding-top: 15px;">
             <% if current_identity %>
+              <li class="pure-menu-item" style="text-align: center; margin: 5px; display: block;">
+                <%= link_to(new_meetup_group_path, class: 'pure-button pure-button-primary', style: 'display: block; text-align: left;') do %>
+                  <i class="fa fa-users"></i> New Meetup
+                <% end %>
+              </li>
               <li class="pure-menu-item" style="text-align: center; margin: 5px;">
-                <%= link_to(new_event_path, class: 'pure-button pure-button-primary') do %>
+                <%= link_to(new_event_path, class: 'pure-button pure-button-primary', style: 'display: block; text-align: left;') do %>
                   <i class="fa fa-calendar-plus-o"></i> New Event
                 <% end %>
               </li>

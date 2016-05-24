@@ -10,6 +10,11 @@ class MeetupScraper
     scrape_event(event_id).first
   end
 
+  def scrape_group(group_urlname)
+    meetup_group = $meetup.groups({ group_urlname: group_urlname })["results"][0]
+    process_group_response(meetup_group)
+  end
+
   def scrape_event(event_id)
     meetup_events = $meetup.events({ event_id: event_id })["results"]
     process_events_response(meetup_events)
@@ -37,6 +42,34 @@ class MeetupScraper
       @meetup_events << response["results"]
     end
     @meetup_events
+  end
+
+  def process_group_response(group)
+    MeetupGroup.find_by!(urlname: group["urlname"])
+  rescue ActiveRecord::RecordNotFound
+    create_meetup_group_from_params(group)
+  end
+
+  def create_meetup_group_from_params(params)
+    transformer = MeetupTransformer.new
+    MeetupGroup.create({
+      description:         params.dig("description"),
+      name:                params.dig("name"),
+      city:                params.dig("city"),
+      state:               params.dig("state"),
+      country:             params.dig("country"),
+      url:                 params.dig("link"),
+      external_id:         params.dig("id"),
+      utc_offset_fmt:      transformer.parse_utc_offset(params.dig("utc_offset")),
+      time_zone:           params.dig("timezone"),
+      urlname:             params.dig("urlname"),
+      photo_highres:       params.dig("group_photo", "highres_link"),
+      photo_thumb:         params.dig("group_photo", "thumb_link"),
+      photo:               params.dig("group_photo", "photo_link"),
+      member_count:        params.dig("members"),
+      utc_offset:          transformer.utc_offset_in_seconds(params.dig("utc_offset")),
+      external_created_at: DateTime.strptime(params.dig("created").to_s, '%Q')
+    })
   end
 
   private

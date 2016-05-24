@@ -1,0 +1,51 @@
+
+<table class="pure-table pure-table-bordered">
+  <tr>
+    <td>Name</td>
+    <td><%= @meetup_group.name %></td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td><%= @meetup_group.description %></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td><%= @meetup_group.city %></td>
+  </tr>
+  <tr>
+    <td>State</td>
+    <td><%= @meetup_group.state %></td>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td><%= @meetup_group.country %></td>
+  </tr>
+  <tr>
+    <td>Url</td>
+    <td><%= @meetup_group.url %></td>
+  </tr>
+  <tr>
+    <td>External ID</td>
+    <td><%= @meetup_group.external_id %></td>
+  </tr>
+  <tr>
+    <td>UTC Offset (formatted)</td>
+    <td><%= @meetup_group.utc_offset_fmt %></td>
+  </tr>
+  <tr>
+    <td>Time Zone</td>
+    <td><%= @meetup_group.time_zone %></td>
+  </tr>
+  <tr>
+    <td>URL Name</td>
+    <td><%= @meetup_group.urlname %></td>
+  </tr>
+  <tr>
+    <td>Photo</td>
+    <td><%= image_tag @meetup_group.photo_thumb %></td>
+  </tr>
+  <tr>
+    <td>Member Count</td>
+    <td><%= @meetup_group.member_count %></td>
+  </tr>
+</table>
