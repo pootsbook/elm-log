@@ -111,40 +111,6 @@ class MeetupScraper
   end
 
   def elm_meetups
-    %w(
-      Elm-user-group-SF
-      Elm-User-Group-Dublin
-      Elm-Warsaw
-      Tokyo-Elm-Programming-Meetup
-      Boston-Elm
-      portlandelm
-      Elm-Copenhagen
-      ElmShop
-      Boston-Elm-Lang-Meetup
-      Elm-User-Group-DC
-      Elm-London-Meetup
-      STLElm
-      Elm-NYC
-      Stockholm-Elm
-      Seattle-Elm
-      Meetup-Elm-Paris
-      chicago-elm
-      Utah-Elm-Users
-      Vienna-Elm-Meetup
-      Elm-Berlin
-      Elm-TLV
-      Elmsinki
-      berlin-elm-hackathon
-      Elm-Wellington
-      Elm-Zurich
-      Sydney-Elm-Meetup
-      Elmoin
-      Elm-Portland-Maine
-      oslo-elm-meetup
-      Hangzhou-Elm-Meetup
-      Brno-Elm-Meetup
-      Elm-user-group-Vancouver
-      Elm-Meetup-Munich
-    )
+    MeetupGroup.pluck(:urlname)
   end
 end
