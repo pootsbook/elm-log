@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  # API
+  constraints subdomain: 'api' do
+    scope module: "v1" do
+      resources :events, only: [:index]
+    end
+  end
+
+  # App
   root to: 'events#index'
   resources :events, except: [:destroy]
   resources :meetup_groups, except: [:edit, :update, :destroy]
