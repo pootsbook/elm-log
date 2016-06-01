@@ -122,6 +122,7 @@ GEM
     puma (3.2.0)
     pure-css-rails (0.6.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -227,6 +228,7 @@ DEPENDENCIES
   pg (~> 0.15)
   puma
   pure-css-rails
+  rack-cors
   rails (= 4.2.6)
   rails_12factor
   rspec-rails (~> 3.0)

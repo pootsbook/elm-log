@@ -37,6 +37,7 @@ gem 'omniauth-github'
 gem 'pure-css-rails'
 gem 'font-awesome-rails'
 gem 'country_select'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :production do
   gem 'puma'
