@@ -1,8 +1,10 @@
-<h2 class="content-subhead"><%= meetup_group.name %></h2>
-<p><%= [meetup_group.city, meetup_group.state, meetup_group.country].join(", ") %> (<%= meetup_group.time_zone %>, <%= meetup_group.utc_offset_fmt %>)</p>
-<p><%= meetup_group.member_count %> members</p>
-<div>
-<%= image_tag meetup_group.photo_thumb, style: "float: left; padding-right: 10px;" %></p>
-<p><%= meetup_group.description %></p>
+<div class="meetup-group-detail" id="meetup-group-<%= meetup_group.id -%>">
+  <h2 class="content-subhead"><%= meetup_group.name %></h2>
+  <h3><%= [meetup_group.city, meetup_group.state, meetup_group.country].join(", ") %> (<%= meetup_group.time_zone %>, <%= meetup_group.utc_offset_fmt %>)</h3>
+  <div>
+  <%= image_tag meetup_group.photo_thumb, style: "float: left; padding-right: 10px;" %></p>
+  <p><%= meetup_group.description.html_safe %></p>
+  <p><%= meetup_group.member_count %> members</p>
+  </div>
+  <p><%= link_to "Meetup Page", meetup_group.url, class: 'pure-button pure-button-primary' %> or <a href="#meetup-list">back to top.</a><p>
 </div>
-<p><%= link_to "Meetup Page", meetup_group.url %><p>

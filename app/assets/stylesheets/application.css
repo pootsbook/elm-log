@@ -24,3 +24,11 @@
 .pure-form .field_with_errors input {
   border: 1px solid red;
 }
+
+.meetup-group-detail {
+  border-bottom: 1px solid #eee;
+}
+
+p.meetup-group-detail {
+  padding-bottom: 1em;
+}

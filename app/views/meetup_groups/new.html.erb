@@ -2,7 +2,7 @@
 
 <%= form_for @meetup_group, html: { class: 'pure-form pure-form-aligned' } do |f| %>
   <fieldset>
-    <legend>Enter the “URL Name” of a Meetup Group</legend>
+    <legend>Enter the “URL Name” of a Meetup Group, i.e., the bold text in: http://www.meetup.com/<strong>Elm-user-group-SF</strong>/</legend>
     <div class="pure-control-group">
       <%= f.label :urlname, "Meetup Group URL Name" %>
       <%= f.text_field :urlname %>

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    session[:redirect] = params[:return_to]
     redirect_to '/auth/github'
   end
 
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
   rescue ActiveRecord::RecordNotSaved => e
     notice = "There was a problem signing in."
   ensure
-    redirect_to root_url, notice: notice
+    redirect_to redirect_location, notice: notice
   end
 
   def destroy
@@ -22,5 +23,9 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def redirect_location
+    session.delete(:redirect) || root_url
   end
 end

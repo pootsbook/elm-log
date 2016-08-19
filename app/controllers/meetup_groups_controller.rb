@@ -2,7 +2,7 @@ class MeetupGroupsController < ApplicationController
   before_action :verify_signed_in, except: [:index]
 
   def index
-    @meetup_groups = MeetupGroup.all
+    @meetup_groups = MeetupGroup.order(city: :asc)
   end
 
   def new

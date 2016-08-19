@@ -1,1 +1,20 @@
+<h1 id="meetup-list">Elm Meetup Groups</h1>
+<ul>
+<% @meetup_groups.each do |group| %>
+  <li>
+    <a href="#meetup-group-<%= group.id -%>"><%= group.city %></a>
+  </li>
+<% end %>
+</ul>
+<p class="meetup-group-detail">
+  <% if current_identity %>
+    <%= link_to(new_meetup_group_path, class: 'pure-button pure-button-primary') do %>
+      <i class="fa fa-users"></i> Add New Meetup
+    <% end %>
+  <% else %>
+    <%= link_to in_path(return_to: new_meetup_group_path), class: 'pure-button' do %>
+      <i class="fa fa-github"></i> Sign in
+    <% end %> to add a new Meetup Group.
+  <% end %>
+</p>
 <%= render @meetup_groups %>
