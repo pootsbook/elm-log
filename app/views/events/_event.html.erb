@@ -1,16 +1,19 @@
-<span class="fa-stack fa-3x">
+<!--<span class="fa-stack fa-3x">
   <i class="fa fa-calendar-o fa-stack-2x"></i>
   <strong class="fa-stack-1x calendar-text">27</strong>
-</span>
+</span>-->
 
+<div class="meetup-group-detail">
   <h2 class="content-subhead"><%= event.title %></h2>
-  <p><%= date_and_time_display(event.local_starts_at) %></p>
-  <p>
+  <h3><%= date_and_time_display(event.local_starts_at) %></h3>
+  <h4>
   <%= event.city %>, <%= event.country %> (<%= sanitize event.host %>)<br>
+  </h4>
   <%= sanitize event.description %><br>
-  <%= link_to "Read More", event.url %>
+  <%= link_to "View on Meetup.com", event.url, class: 'pure-button pure-button-primary' %>
 <% if current_identity -%>
   | <%= link_to "Show", event_path(event) %>
   | <%= link_to "Edit", edit_event_path(event) %>
 <% end -%>
   </p>
+</div>
