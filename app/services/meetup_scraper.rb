@@ -41,6 +41,7 @@ class MeetupScraper
       response = $meetup.events({ group_urlname: urlname })
       raise RateLimitExceeded if ["bad_request", "blocked", "throttled"].include?(response["code"])
       @meetup_events << response["results"]
+      sleep 1
     end
     @meetup_events
   end
