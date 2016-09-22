@@ -23,6 +23,7 @@ class MeetupScraper
   def scrape_past_events
     meetup_events = elm_meetups.map do |urlname|
       $meetup.events({ group_urlname: urlname, status: 'past' })
+      sleep 1
     end.flatten
     process_events_response(meetup_events)
   end
