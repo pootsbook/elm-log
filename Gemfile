@@ -38,6 +38,7 @@ gem 'pure-css-rails'
 gem 'font-awesome-rails'
 gem 'country_select'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'twitter'
 
 group :production do
   gem 'puma'
