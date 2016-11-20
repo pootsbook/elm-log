@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118172521) do
+ActiveRecord::Schema.define(version: 20161118201735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20161118172521) do
     t.datetime "updated_at",          null: false
     t.string   "time_zone"
   end
+
+  create_table "extracted_urls", force: :cascade do |t|
+    t.string   "url",              null: false
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "canonical_url_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "extracted_urls", ["canonical_url_id"], name: "index_extracted_urls_on_canonical_url_id", using: :btree
+  add_index "extracted_urls", ["source_type", "source_id"], name: "index_extracted_urls_on_source_type_and_source_id", using: :btree
 
   create_table "identities", force: :cascade do |t|
     t.string   "uid"
