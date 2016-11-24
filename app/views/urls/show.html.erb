@@ -1,5 +1,5 @@
 <p>
-  <%= link_to @url.url, @url.url %>
+  <%= link_to @url.url, @url.url, target: '_blank' %>
 </p>
 <%= content_tag(:iframe, '', src: @url.url) %>
 <p>
