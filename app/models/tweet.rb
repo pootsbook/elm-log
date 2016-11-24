@@ -17,5 +17,6 @@ class Tweet < ActiveRecord::Base
 
   def process!
     UrlExtractor.new(self).extract!
+    update!(processed: true)
   end
 end

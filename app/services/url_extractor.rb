@@ -31,7 +31,6 @@ class UrlExtractor
     ActiveRecord::Base.transaction do
       canonical_url = ExtractedUrl.find_by(url: url, canonical_url_id: nil)
       ExtractedUrl.create!(url: url, source: tweet, canonical_url: canonical_url)
-      tweet.update!(processed: true)
     end
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.warn("RecordInvalid ExtractedUrl from ::Tweet #{tweet.id} with url #{url}")
