@@ -12,6 +12,21 @@ class ExtractedUrl < ActiveRecord::Base
   scope :next, -> (created_at) { where('created_at > ?', created_at).limit(1) }
   scope :prev, -> (created_at) { where('created_at < ?', created_at).order(created_at: :desc).limit(1) }
 
+  def self.refeed_tweets
+    canonical.like('twitter.com/').find_each do |extracted_url|
+      begin
+        tweet_id = extracted_url.url.split('/').last
+        object = $twitter.status(tweet_id)
+        ::Tweet.create!(
+          twitter_id: object.id,
+          raw: object)
+        extracted_url.archive!
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.warn("RecordInvalid Tweet #{object.id}")
+      end
+    end
+  end
+
   def archive!
     update!(archived_at: Time.now)
   end
