@@ -1,0 +1,9 @@
+<p>
+  <%= link_to @url.url, @url.url %>
+</p>
+<%= content_tag(:iframe, '', src: @url.url) %>
+<p>
+  <%= button_to 'Archive', archived_urls_path(id: @url.id, detail: true) %>
+
+  <%= link_to 'Next', url_path(@url.next) if @url.next %>
+</p>

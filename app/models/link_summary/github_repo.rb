@@ -1,0 +1,2 @@
+class GithubRepoSummary < LinkSummary
+end
