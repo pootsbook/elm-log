@@ -3,7 +3,7 @@
 </p>
 <%= content_tag(:iframe, '', src: @url.url) %>
 <p>
-  <%= button_to 'Archive', archived_urls_path(id: @url.id, detail: true) %>
+  <%= button_to 'Archive', archived_urls_path(id: @url.id, detail: true, filter: params[:filter]) %>
 
-  <%= link_to 'Next', url_path(@url.next, filter: params[:filter]) if @url.next %>
+  <%= link_to 'Next', url_path(@url.next(params[:filter]), filter: params[:filter]) if @url.next(params[:filter]) %>
 </p>

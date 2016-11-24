@@ -16,11 +16,19 @@ class ExtractedUrl < ActiveRecord::Base
     update!(archived_at: Time.now)
   end
 
-  def next
-    self.class.canonical.active.next(created_at).first
+  def next(filter)
+    if filter.present?
+      self.class.canonical.active.like(filter).next(created_at).first
+    else
+      self.class.canonical.active.next(created_at).first
+    end
   end
 
-  def prev
-    self.class.canonical.active.prev(created_at).first
+  def prev(filter)
+    if filter.present?
+      self.class.canonical.active.like(filter).prev(created_at).first
+    else
+      self.class.canonical.active.prev(created_at).first
+    end
   end
 end
