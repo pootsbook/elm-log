@@ -5,5 +5,5 @@
 <p>
   <%= button_to 'Archive', archived_urls_path(id: @url.id, detail: true) %>
 
-  <%= link_to 'Next', url_path(@url.next) if @url.next %>
+  <%= link_to 'Next', url_path(@url.next, filter: params[:filter]) if @url.next %>
 </p>
