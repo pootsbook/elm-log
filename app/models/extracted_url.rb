@@ -31,6 +31,10 @@ class ExtractedUrl < ActiveRecord::Base
     update!(archived_at: Time.now)
   end
 
+  def clean_url!
+    update!(url: UrlCleaner.clean(url))
+  end
+
   def next(filter)
     if filter.present?
       self.class.canonical.active.like(filter).next(created_at).first
