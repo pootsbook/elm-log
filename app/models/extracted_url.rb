@@ -16,11 +16,12 @@ class ExtractedUrl < ActiveRecord::Base
     canonical.active.like('twitter.com/').find_each do |extracted_url|
       begin
         tweet_id = extracted_url.url.split('/').last
-        next if ::Tweet.find_by_twitter_id(tweet_id)
-        object = $twitter.status(tweet_id)
-        ::Tweet.create!(
-          twitter_id: object.id,
-          raw: object)
+        if ::Tweet.find_by_twitter_id(tweet_id).nil?
+          object = $twitter.status(tweet_id)
+          ::Tweet.create!(
+            twitter_id: object.id,
+            raw: object)
+        end
         extracted_url.archive!
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.warn("RecordInvalid Tweet #{object.id}")
