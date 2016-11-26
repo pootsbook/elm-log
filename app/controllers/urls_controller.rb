@@ -2,6 +2,7 @@ class UrlsController < ApplicationController
   before_action :verify_signed_in
 
   def index
+    @unprocessed_tweet_count = Tweet.unprocessed.count
     if filter = params[:filter]
       @urls = ExtractedUrl.canonical.active.like(filter)
     else
