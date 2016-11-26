@@ -13,9 +13,10 @@ class ExtractedUrl < ActiveRecord::Base
   scope :prev, -> (created_at) { where('created_at < ?', created_at).order(created_at: :desc).limit(1) }
 
   def self.refeed_tweets
-    canonical.like('twitter.com/').find_each do |extracted_url|
+    canonical.active.like('twitter.com/').find_each do |extracted_url|
       begin
         tweet_id = extracted_url.url.split('/').last
+        next if ::Tweet.find_by_twitter_id(tweet_id)
         object = $twitter.status(tweet_id)
         ::Tweet.create!(
           twitter_id: object.id,
