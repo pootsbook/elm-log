@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Archive</th>
+      <th>Clean</th>
       <th>Show</th>
       <th>Link</th>
     </tr>
@@ -11,6 +12,7 @@
 <% @urls.each do |url| %>
   <tr>
     <td><%= button_to 'Archive', archived_urls_path(id: url.id, filter: params[:filter]), class: 'pure-button' %></td>
+    <td><%= button_to 'Clean', cleaned_urls_path(id: url.id, filter: params[:filter]), class: 'pure-button' %></td>
     <td><%= link_to 'Show', url_path(url, filter: params[:filter]), class: 'pure-button pure-button-primary' %></td>
     <td><%= link_to url.url, url.url, target: '_blank' %></td>
   </tr>

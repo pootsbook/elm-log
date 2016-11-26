@@ -33,8 +33,16 @@ class ExtractedUrl < ActiveRecord::Base
     update!(archived_at: Time.now)
   end
 
-  def clean_url!
+  def clean!
     update!(url: UrlCleaner.clean(url))
+    recanonize!
+  end
+
+  def recanonize!
+    urls = ExtractedUrl.canonical.like(url)
+    urls[1..-1].each do |extracted_url|
+      extracted_url.update!(canonical_url: urls[0])
+    end
   end
 
   def next(filter)

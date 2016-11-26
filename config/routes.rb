@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :meetup_groups, except: [:edit, :update, :destroy]
   resources :urls, only: [:index, :show]
   resources :archived_urls, only: [:create]
+  resources :cleaned_urls, only: [:create]
   resources :tweet_processing_jobs, only: [:create]
 
   resources :sessions, only: [:new, :create, :destroy]
