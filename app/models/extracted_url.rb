@@ -13,6 +13,7 @@ class ExtractedUrl < ActiveRecord::Base
   scope :prev, -> (created_at) { where('created_at < ?', created_at).order(created_at: :desc).limit(1) }
 
   def self.refeed_tweets
+    return if canonical.active.like('twitter.com/').count < 1
     canonical.active.like('twitter.com/').find_each do |extracted_url|
       begin
         tweet_id = extracted_url.url.split('/').last
@@ -27,6 +28,7 @@ class ExtractedUrl < ActiveRecord::Base
         Rails.logger.warn("RecordInvalid Tweet #{object.id}")
       end
     end
+    Tweet.process!
   end
 
   def archive!

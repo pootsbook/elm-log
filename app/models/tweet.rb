@@ -8,6 +8,7 @@ class Tweet < ActiveRecord::Base
       unprocessed.find_each do |tweet|
         tweet.process!
       end
+      ExtractedUrl.refeed_tweets
     end
   end
 
