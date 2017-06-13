@@ -7,11 +7,9 @@ Rails.application.routes.draw do
   end
 
   # Route *. to www.
-	constraints(host: /^(?!www\.)/i) do
-    match '(*any)' => redirect { |params, request|
+  match '(*any)', to: redirect { |params, request|
       URI.parse(request.url).tap { |uri| uri.host = "www.#{uri.host}" }.to_s
-    }, :via => :all
-  end
+    }, via: :all, constraints: RootDomainConstraint.new(:api, :www)
 
   # App
   root to: 'events#index'
