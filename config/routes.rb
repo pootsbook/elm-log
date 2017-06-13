@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   constraints subdomain: 'api' do
     scope module: "v1" do
       resources :events, only: [:index]
+      resources :meetup_groups, only: [:index]
     end
   end
 
