@@ -6,6 +6,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # Route *. to www.
+	constraints(host: /^(?!www\.)/i) do
+    match '(*any)' => redirect { |params, request|
+      URI.parse(request.url).tap { |uri| uri.host = "www.#{uri.host}" }.to_s
+    }
+  end
+
   # App
   root to: 'events#index'
   resources :events, except: [:destroy]
